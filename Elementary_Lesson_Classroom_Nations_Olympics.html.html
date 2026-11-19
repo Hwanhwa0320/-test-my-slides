@@ -1,0 +1,919 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>우리 반 나라 올림픽</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&display=swap">
+<style>
+/* Layout: one classroom TV screen. A paper header with the lesson steps, a string of bunting carrying every nation's flag, then one big stage per step. Single bright theme by choice. */
+:root{
+  --sky:#E8F1F8; --paper:#FFFFFF; --soft:#F2F7FB; --ink:#1C2A44; --muted:#56667F; --line:#C8D6E5;
+  --red:#E4473A; --yellow:#F5C02E; --blue:#2C69D3; --green:#249960; --gold:#D99A08;
+  --goldsoft:#FFF4CF; --greensoft:#E2F4EA; --scrim:rgba(232,241,248,.9); --shade:rgba(28,42,68,.45);
+  --display:'Jua','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --body:'Nanum Gothic','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --r:18px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--sky);color:var(--ink);font-family:var(--body);font-size:clamp(15px,.45vw + 11px,21px);line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* header */
+.top{background:var(--paper);border-bottom:3px solid var(--ink)}
+.topbar{display:flex;align-items:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.brand-mark{width:30px;height:36px;position:relative;flex:0 0 auto}
+.brand-mark::before{content:"";position:absolute;left:2px;top:0;width:3px;height:100%;background:var(--ink);border-radius:2px}
+.brand-mark::after{content:"";position:absolute;left:5px;top:2px;width:24px;height:17px;background:var(--red);clip-path:polygon(0 0,100% 50%,0 100%)}
+.brand strong{font-family:var(--display);font-weight:400;font-size:1.35em;display:block;line-height:1.1}
+.brand small{color:var(--muted);font-size:.75em;letter-spacing:.03em}
+.steps{display:flex;gap:4px;flex:1 1 auto;justify-content:center;flex-wrap:wrap;min-width:0}
+.step{display:flex;align-items:center;gap:7px;border:2px solid transparent;background:none;border-radius:999px;padding:5px 14px 5px 5px;cursor:pointer;font-weight:800;white-space:nowrap;font-size:.92em}
+.step i{font-style:normal;width:1.75em;height:1.75em;border-radius:50%;display:grid;place-items:center;background:var(--soft);border:2px solid var(--line);font-family:var(--display);font-weight:400}
+.step:hover{border-color:var(--line)}
+.step.on{background:var(--ink);color:var(--paper)}
+.step.on i{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+.tools{display:flex;gap:8px;flex:0 0 auto}
+.tool{border:2px solid var(--line);background:var(--paper);border-radius:10px;padding:5px 12px;cursor:pointer;font-weight:800;font-size:.82em}
+.tool[aria-pressed="false"]{color:var(--muted);background:var(--soft)}
+
+/* bunting */
+.bunting{height:84px}
+.bunting-in{position:relative;height:100%}
+.bunting-in svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.bunting-in path{fill:none;stroke:var(--ink);stroke-width:2;vector-effect:non-scaling-stroke}
+.pennant{position:absolute;height:clamp(26px,3.4vw,46px);aspect-ratio:3/2;padding:0;border:2px solid var(--ink);border-radius:3px;background:var(--paper);overflow:hidden;cursor:pointer;transform-origin:50% 0;transition:margin .15s}
+.pennant:hover{margin-top:4px}
+.pennant img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* page */
+main{padding-block:8px 48px;max-width:1800px;margin:0 auto}
+.page{display:flex;flex-direction:column;gap:20px}
+.pagehead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.pagehead > div:first-child{min-width:0}
+.headtools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.eyebrow{font-weight:800;font-size:.8em;letter-spacing:.08em;color:var(--blue)}
+h1{font-size:clamp(28px,2.2vw + 10px,56px)}
+.lead{color:var(--muted);max-width:62ch;margin-top:6px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2.5px solid var(--ink);background:var(--paper);border-radius:14px;padding:.5em 1.1em;font-weight:800;cursor:pointer;box-shadow:0 4px 0 var(--ink);transition:transform .08s,box-shadow .08s;white-space:nowrap}
+.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn:disabled{opacity:.38;cursor:not-allowed}
+.btn.primary{background:var(--red);color:var(--paper)}
+.btn.ok{background:var(--green);color:var(--paper)}
+.btn.danger{background:var(--red);color:var(--paper)}
+.btn.big{font-family:var(--display);font-weight:400;font-size:clamp(20px,1.3vw + 9px,34px);padding:.4em 1.1em;border-radius:18px}
+.btn.ghost{box-shadow:none;border-color:var(--line)}
+.btn.ghost:active:not(:disabled){transform:translateY(1px);box-shadow:none}
+.btn.sm{font-size:.85em;padding:.3em .8em}
+.btn.ok.on{box-shadow:0 0 0 4px var(--yellow),0 4px 0 var(--ink)}
+.btn.ghost.on{background:var(--soft);border-color:var(--muted)}
+.link{background:none;border:0;padding:0;color:var(--blue);font-weight:800;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.link.danger{color:var(--red)}
+
+/* setup */
+.notice{background:var(--goldsoft);border:2px dashed var(--gold);border-radius:14px;padding:12px 16px}
+.nation-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.ncard{background:var(--paper);border:2.5px solid var(--ink);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.flagdrop{position:relative;display:block;aspect-ratio:3/2;border-radius:10px;overflow:hidden;border:2px solid var(--line);background:var(--paper);cursor:pointer}
+.flagdrop img{width:100%;height:100%;object-fit:contain;display:block}
+.flagdrop .dropcue{position:absolute;left:8px;right:8px;bottom:8px;background:var(--ink);color:var(--paper);border-radius:8px;text-align:center;font-weight:800;font-size:.8em;padding:4px;opacity:0;transition:opacity .15s}
+.flagdrop.empty .dropcue,.flagdrop:hover .dropcue,.flagdrop.over .dropcue{opacity:.92}
+.flagdrop.over{border:3px dashed var(--blue)}
+.tag{position:absolute;top:8px;left:8px;background:var(--yellow);font-size:.7em;font-weight:800;padding:2px 8px;border-radius:999px}
+.fields{display:flex;flex-direction:column;gap:6px}
+.f{display:grid;grid-template-columns:5.4em minmax(0,1fr);align-items:center;gap:8px;font-size:.85em}
+.f span{color:var(--muted);font-weight:800}
+.f input{width:100%;min-width:0;border:2px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--soft)}
+.f input:focus{border-color:var(--blue);outline:none;background:var(--paper)}
+.cardfoot{display:flex;align-items:center;gap:12px;font-size:.8em}
+.num{font-family:var(--display);width:1.9em;height:1.9em;display:grid;place-items:center;border-radius:50%;background:var(--ink);color:var(--paper);margin-right:auto;font-size:1.1em}
+
+/* shared flag frame */
+.flagframe{aspect-ratio:3/2;background:var(--paper);border:2.5px solid var(--ink);border-radius:10px;overflow:hidden;max-width:100%}
+.flagframe img{width:100%;height:100%;object-fit:contain;display:block}
+.flagframe.sm{border-width:2px;border-radius:6px}
+
+/* ceremony */
+.stage-body{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(20px,3vw,60px);align-items:center;background:var(--paper);border:3px solid var(--ink);border-radius:28px;padding:clamp(18px,3vw,48px)}
+.bigflag .flagframe{width:min(100%,calc(54vh * 1.5));margin:0 auto;border-width:4px;border-radius:14px}
+.stage-text{display:flex;flex-direction:column;gap:10px;min-width:0}
+.kicker{font-weight:800;color:var(--red);font-size:1.1em}
+.nation-title{font-size:clamp(40px,5vw,110px);overflow-wrap:anywhere}
+.founder{font-size:1.3em}
+.intro{font-family:var(--display);font-size:clamp(22px,1.8vw + 6px,44px);line-height:1.3;color:var(--blue)}
+.stage-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.thumb{width:58px;aspect-ratio:3/2;padding:0;border:2.5px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer;background:var(--paper);transition:transform .15s}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb.on{border-color:var(--red);transform:translateY(-5px)}
+
+/* versus games */
+.versus{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:clamp(12px,2vw,36px);align-items:stretch}
+.arena{background:var(--paper);border:3px solid var(--ink);border-radius:26px;padding:clamp(16px,1.6vw,28px);display:flex;flex-direction:column;align-items:center;gap:12px;position:relative;min-width:0}
+.arena.empty{border:3px dashed var(--line);justify-content:center;color:var(--muted)}
+.arena .flagframe{width:min(100%,calc(24vh * 1.5))}
+.ph{display:grid;place-items:center;text-align:center;font-weight:800;border:3px dashed var(--line);background:var(--soft);color:var(--muted);padding:8px}
+.aname{font-family:var(--display);font-size:clamp(26px,2.3vw,52px);line-height:1.1;text-align:center;overflow-wrap:anywhere}
+.akid{color:var(--muted);font-weight:800;margin-top:-8px}
+.arena.win{background:var(--goldsoft);border-color:var(--gold);box-shadow:0 0 0 6px var(--yellow)}
+.crown{position:absolute;top:-20px;background:var(--gold);color:var(--paper);font-family:var(--display);font-size:1.3em;padding:2px 20px;border-radius:999px;border:2.5px solid var(--ink)}
+.vs{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.vs-label{font-family:var(--display);font-size:clamp(36px,4vw,84px);color:var(--red);line-height:1}
+.vs small{color:var(--muted);font-weight:800}
+.score{font-family:var(--display);font-size:clamp(44px,4.2vw,96px);display:flex;gap:.25em;line-height:1;font-variant-numeric:tabular-nums}
+.score i{font-style:normal;color:var(--muted)}
+.resultline{text-align:center;font-family:var(--display);font-size:clamp(22px,1.5vw + 8px,40px);min-height:1.4em}
+.resultline b{color:var(--red);font-weight:400}
+.die{--ds:clamp(96px,min(15vh,12vw),180px);width:var(--ds);height:var(--ds);flex:0 0 auto;background:var(--paper);border:4px solid var(--ink);border-radius:22%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:calc(var(--ds) * .13);gap:calc(var(--ds) * .05);box-shadow:0 6px 0 var(--ink)}
+.die span{display:block;width:100%;height:100%;border-radius:50%}
+.dnum{font-family:var(--display);font-size:clamp(34px,4vh,60px);line-height:1;min-height:1em;color:var(--ink);font-variant-numeric:tabular-nums}
+.arena.win .dnum{color:var(--red)}
+.die span.on{background:var(--ink)}
+.arena.win .die span.on{background:var(--red)}
+.dq{grid-column:1 / -1;grid-row:1 / -1;place-self:center;font-family:var(--display);font-weight:400;font-size:clamp(48px,7vh,90px);color:var(--line);line-height:1}
+.die.rolling{animation:shake .16s infinite}
+.die.land{animation:land .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes land{0%{transform:scale(1.35) rotate(-8deg)}100%{transform:scale(1)}}
+@keyframes shake{0%{transform:rotate(-14deg) scale(1.03)}50%{transform:rotate(14deg)}100%{transform:rotate(-14deg) scale(1.03)}}
+.picker{background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:12px 14px}
+.pk-label{font-weight:800;margin-bottom:8px}
+.pk-label span{font-weight:400;color:var(--muted);font-size:.85em;margin-left:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:flex;align-items:center;gap:8px;border:2px solid var(--line);background:var(--soft);border-radius:999px;padding:4px 12px 4px 5px;cursor:pointer;font-weight:800;max-width:100%}
+.chip img{height:28px;aspect-ratio:3/2;object-fit:cover;border-radius:5px;border:1.5px solid var(--ink);background:var(--paper);flex:0 0 auto}
+.chip em{font-style:normal;font-size:.75em;background:var(--paper);border-radius:999px;padding:0 8px;color:var(--muted);border:1px solid var(--line)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.on em{color:var(--ink)}
+.chip:disabled{opacity:.45;cursor:not-allowed}
+
+/* rps */
+.wins{display:flex;gap:8px}
+.wins span{width:20px;height:20px;border-radius:50%;border:2.5px solid var(--ink);background:var(--paper)}
+.wins span.on{background:var(--gold)}
+.hand-show{font-size:clamp(64px,min(13vh,10vw),150px);line-height:1;height:1.15em;display:grid;place-items:center}
+.hand-show .dq{font-size:.7em}
+.hands{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.hbtn{display:flex;flex-direction:column;align-items:center;border:2.5px solid var(--ink);background:var(--soft);border-radius:14px;padding:6px 12px;cursor:pointer;font-weight:800;box-shadow:0 3px 0 var(--ink);min-width:4.4em}
+.hbtn span{font-size:1.9em;line-height:1.15}
+.hbtn.on{background:var(--yellow)}
+.hbtn:disabled{opacity:.35;cursor:not-allowed}
+.hbtn:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+#count{position:fixed;inset:0;display:grid;place-items:center;background:var(--scrim);z-index:50}
+.cw{font-family:var(--display);font-size:clamp(90px,18vw,320px);animation:pop .45s ease-out both}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* quiz */
+.qcount{font-family:var(--display);font-size:1.6em;line-height:1}
+.qcount small{font-size:.6em;color:var(--muted)}
+.qcard{background:var(--paper);border:3px solid var(--ink);border-radius:26px;padding:clamp(18px,2.4vw,40px);text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
+.qtext{font-family:var(--display);font-size:clamp(30px,3.3vw,72px);line-height:1.2;text-wrap:balance}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.opt{display:flex;align-items:center;gap:16px;background:var(--paper);border:3px solid var(--ink);border-radius:20px;padding:clamp(10px,1.1vw,20px);min-width:0;transition:opacity .3s}
+.opt b{flex:0 0 auto;width:1.7em;height:1.7em;border-radius:50%;display:grid;place-items:center;color:var(--paper);font-family:var(--display);font-weight:400;font-size:clamp(24px,2.2vw,50px)}
+.opt span{font-family:var(--display);font-size:clamp(24px,2.3vw,52px);line-height:1.15;min-width:0;overflow-wrap:anywhere}
+.o1 b{background:var(--red)}.o2 b{background:var(--yellow);color:var(--ink)}.o3 b{background:var(--blue)}.o4 b{background:var(--green)}
+.opts.revealed .opt{opacity:.3}
+.opts.revealed .opt.right{opacity:1;background:var(--goldsoft);border-color:var(--gold);box-shadow:0 0 0 5px var(--yellow)}
+.opt .mark{margin-left:auto;font-family:var(--display);color:var(--green);font-size:clamp(22px,1.8vw,40px);white-space:nowrap}
+.explain{font-size:clamp(18px,1.2vw + 8px,32px);font-weight:800}
+.qactions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* coop */
+.mission{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:stretch}
+.mcard{background:var(--paper);border:3px solid var(--ink);border-radius:26px;padding:clamp(16px,2vw,32px);display:flex;flex-direction:column;gap:12px;min-width:0}
+.mcard h2{font-size:clamp(32px,3.3vw,72px)}
+.mdesc{font-size:clamp(18px,1.2vw + 7px,32px);max-width:40ch;line-height:1.45}
+.need{font-weight:800;color:var(--red)}
+.msteps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:st}
+.msteps li{counter-increment:st;display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:clamp(20px,1.3vw + 8px,34px);line-height:1.25}
+.msteps li::before{content:counter(st);flex:0 0 auto;width:1.6em;height:1.6em;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:var(--paper);font-size:.8em}
+.topic{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--soft);border:2px dashed var(--blue);border-radius:16px;padding:10px 16px}
+.topic span{font-weight:800;color:var(--blue)}
+.topic strong{font-family:var(--display);font-weight:400;font-size:clamp(28px,2.6vw,58px)}
+.msel{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--muted);font-size:.9em}
+.msel select{border:2px solid var(--line);border-radius:10px;padding:6px 8px;background:var(--paper);max-width:14em}
+.tbox{background:var(--paper);border:3px solid var(--ink);border-radius:26px;padding:20px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.timer{position:relative;width:clamp(150px,22vh,260px);aspect-ratio:1}
+.timer svg{width:100%;height:100%;transform:rotate(-90deg)}
+.tr-bg{fill:none;stroke:var(--soft);stroke-width:12}
+.tr-fg{fill:none;stroke:var(--blue);stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset 1s linear}
+.timer.done .tr-fg{stroke:var(--red)}
+.tnum{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.tnum b{font-family:var(--display);font-weight:400;font-size:clamp(56px,9vh,110px);line-height:1;font-variant-numeric:tabular-nums}
+.tnum small{font-weight:800;color:var(--muted)}
+.timer.done .tnum b,.timer.done .tnum small{color:var(--red)}
+.teams{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.team{background:var(--paper);border:2.5px solid var(--ink);border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:10px;align-items:center;min-width:0}
+.team.ok{background:var(--greensoft);border-color:var(--green)}
+.tlabel{font-family:var(--display);font-size:1.3em}
+.tflags{display:flex;align-items:center;gap:6px;justify-content:center;width:100%}
+.tflags figure{margin:0;flex:1 1 0;min-width:0;text-align:center}
+.tflags figcaption{font-weight:800;font-size:.85em;margin-top:4px;overflow-wrap:anywhere}
+.plus{font-family:var(--display);font-size:1.6em;color:var(--red)}
+.tbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+
+/* awards */
+.board-wrap{overflow-x:auto;background:var(--paper);border:3px solid var(--ink);border-radius:22px}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{padding:10px 14px;text-align:center;border-bottom:2px solid var(--soft)}
+tbody tr:last-child td{border-bottom:0}
+th{font-weight:800;color:var(--muted);font-size:.85em;letter-spacing:.04em}
+th.l,td.nm{text-align:left}
+.nmc{display:flex;align-items:center;gap:12px}
+.nmc img{height:42px;aspect-ratio:3/2;object-fit:contain;border:2px solid var(--ink);border-radius:5px;background:var(--paper)}
+.nmc strong{font-family:var(--display);font-weight:400;font-size:1.4em;display:block;line-height:1.1}
+.nmc small{color:var(--muted);font-weight:700}
+.adj{display:inline-flex;align-items:center;gap:10px}
+.adj b{font-family:var(--display);font-weight:400;font-size:1.6em;min-width:1.2em;font-variant-numeric:tabular-nums}
+.adj button{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);background:var(--soft);cursor:pointer;font-weight:800;line-height:1;padding:0;opacity:.45}
+tr:hover .adj button,.adj button:focus-visible{opacity:1}
+.total{font-family:var(--display);font-size:1.8em;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+.awardbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--ink);color:var(--paper);border-radius:22px;padding:18px 24px}
+.awardbar h2{font-size:clamp(24px,2vw + 6px,44px)}
+.awardbar p{opacity:.85}
+
+/* award overlay */
+.cert.suspense{min-height:min(560px,76vh);justify-content:center;gap:20px}
+.medal.spin{width:clamp(110px,16vh,170px);height:clamp(110px,16vh,170px);border-width:5px;animation:spinm .5s linear infinite}
+@keyframes spinm{to{transform:rotateY(360deg)}}
+.sus-title{font-size:clamp(48px,8vh,96px);color:var(--red)}
+#stageov{position:fixed;inset:0;z-index:40;background:var(--sky);overflow:auto}
+.ov-inner{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding-block:calc(20px + env(safe-area-inset-top,0px)) calc(20px + env(safe-area-inset-bottom,0px))}
+.cert{background:var(--paper);width:min(100%,920px);border:3px solid var(--ink);outline:2px solid var(--gold);outline-offset:-14px;border-radius:6px;padding:clamp(26px,3vw,48px) clamp(24px,4vw,64px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;animation:pop .4s ease-out both}
+.cert-no{align-self:flex-start;font-size:.85em;color:var(--muted);font-weight:700}
+.cert-title{font-size:clamp(40px,5.5vh,76px);letter-spacing:.6em;margin-right:-.6em}
+.award-name{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:clamp(26px,3.8vh,50px);color:var(--red);line-height:1.2}
+.medal{width:1.15em;height:1.15em;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--goldsoft),var(--yellow) 45%,var(--gold) 80%);border:3px solid var(--ink);flex:0 0 auto}
+.cert-flag{width:min(100%,calc(21vh * 1.5));margin-block:4px}
+.cert-nation{font-family:var(--display);font-size:clamp(34px,5.5vh,76px);line-height:1.1;overflow-wrap:anywhere}
+.cert-kid{color:var(--muted);font-weight:800}
+.cert-body{font-size:clamp(18px,2.5vh,30px);max-width:30em;line-height:1.6}
+.cert-foot{display:flex;justify-content:space-between;align-items:flex-end;width:100%;gap:12px;margin-top:8px;flex-wrap:wrap}
+.cert-stars{font-family:var(--display);font-size:1.6em;color:var(--gold)}
+.cert-date{text-align:right;font-size:.95em}
+.ov-nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
+.ov-nav > span{font-weight:800;color:var(--muted)}
+.ring{position:relative;width:min(100%,74vh);aspect-ratio:1}
+.ring svg{position:absolute;inset:0;width:100%;height:100%}
+.ring circle{fill:none;stroke:var(--red);stroke-width:.7;stroke-dasharray:2.2 1.6}
+.ring-flag{position:absolute;transform:translate(-50%,-50%);width:clamp(60px,14%,140px);text-align:center;font-weight:800;font-size:.8em;animation:pop .5s ease-out both}
+.ring-flag span{display:block;margin-top:4px;background:var(--paper);border-radius:8px;padding:0 6px;overflow-wrap:anywhere;line-height:1.3}
+.ring-center{position:absolute;inset:27%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px}
+.ring-center h2{font-size:clamp(30px,6vmin,84px)}
+.ring-center p{font-weight:800}
+
+/* modal, toast, fx */
+#modal{position:fixed;inset:0;background:var(--shade);display:grid;place-items:center;z-index:60;padding:16px}
+.modal-box{background:var(--paper);border:3px solid var(--ink);border-radius:20px;padding:24px;max-width:480px;display:flex;flex-direction:column;gap:18px;font-size:1.05em;font-weight:700}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:12px 20px;border-radius:14px;font-weight:800;z-index:70;max-width:calc(100% - 32px);text-align:center}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:80;width:100%;height:100%}
+
+@media (max-width:1100px){
+  .nation-grid,.teams{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stage-body{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .versus{grid-template-columns:1fr}
+  .vs{flex-direction:row;flex-wrap:wrap}
+  .opts,.mission,.nation-grid,.teams{grid-template-columns:1fr}
+  .steps{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+  .bunting{height:64px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+
+<header class="top">
+  <div class="topbar gut">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"></span><div><strong>우리 반 나라 올림픽</strong><small>1학년 AI 수업 · 나라 만들기</small></div></div>
+    <nav class="steps" id="steps" aria-label="수업 순서"></nav>
+    <div class="tools">
+      <button class="tool" id="soundBtn" data-act="sound" aria-pressed="true">소리 켜짐</button>
+      <button class="tool" data-act="fs">전체 화면</button>
+    </div>
+  </div>
+</header>
+<div class="bunting gut"><div class="bunting-in" id="buntingIn"></div></div>
+<main id="main" class="gut"></main>
+<div id="count" hidden></div>
+<div id="stageov" hidden></div>
+<div id="modal" hidden></div>
+<div id="toast" role="status" hidden></div>
+<canvas id="fx" hidden></canvas>
+
+<script>
+(function(){
+const KEY='nara-olympic-v1';
+const CATS=['dice','rps','quiz','coop'];
+const CATN={dice:'주사위',rps:'가위바위보',quiz:'퀴즈',coop:'협동'};
+const VIEWS=[['setup','나라 등록'],['ceremony','건국 선포식'],['dice','주사위 대결'],['rps','가위바위보 왕국전'],['quiz','상식 퀴즈'],['coop','협동 미션'],['awards','메달판·시상식']];
+const HANDS={scissors:{e:'✌️',n:'가위'},rock:{e:'✊',n:'바위'},paper:{e:'✋',n:'보'}};
+const BEATS={scissors:'paper',rock:'scissors',paper:'rock'};
+
+const QV=2;
+const QS=[
+ {q:'시계의 짧은 바늘은 무엇을 알려 줄까요?',o:['분','초','시','날짜'],a:2,e:'짧은 바늘은 ‘시’, 긴 바늘은 ‘분’을 알려 줘요.'},
+ {q:'우리 몸에서 맛을 느끼는 곳은?',o:['귀','혀','눈','손'],a:1,e:'혀로 단맛, 짠맛, 신맛을 느껴요.'},
+ {q:'닭이 낳는 것은 무엇일까요?',o:['우유','꿀','알','털실'],a:2,e:'닭은 알을 낳아요. 우리가 먹는 달걀이에요.'},
+ {q:'우리가 마시는 우유를 주는 동물은?',o:['젖소','닭','거북','고양이'],a:0,e:'우리가 마시는 우유는 대부분 젖소에게서 얻어요.'},
+ {q:'땅속에서 자라는 채소는?',o:['사과','수박','포도','감자'],a:3,e:'감자는 땅속에서 자라요. 고구마와 당근도 땅속에서 자라요.'},
+ {q:'비가 올 때 쓰는 것은?',o:['선글라스','우산','장갑','수영모'],a:1,e:'비가 오면 우산을 쓰고 장화를 신어요.'},
+ {q:'밤하늘에 밝게 떠 있는 것은?',o:['해','번개','달','무지개'],a:2,e:'밤에는 달이 떠요. 달은 날마다 모양이 조금씩 바뀌어요.'},
+ {q:'3 더하기 4는 얼마일까요?',o:['6','7','8','9'],a:1,e:'3 + 4 = 7이에요.'},
+ {q:'8에서 3을 빼면 얼마일까요?',o:['5','4','6','3'],a:0,e:'8 − 3 = 5예요.'},
+ {q:'5 더하기 5는 얼마일까요?',o:['8','9','11','10'],a:3,e:'5 + 5 = 10. 두 손의 손가락을 모두 합친 수예요.'},
+ {q:'네모(사각형)의 뾰족한 꼭짓점은 몇 개일까요?',o:['3개','4개','5개','6개'],a:1,e:'네모는 꼭짓점과 변이 4개씩 있어요.'},
+ {q:'데굴데굴 잘 굴러가는 모양은?',o:['네모','세모','동그라미','별'],a:2,e:'동그라미는 뾰족한 곳이 없어서 잘 굴러가요.'},
+ {q:'주사위에서 가장 큰 숫자는?',o:['5','10','8','6'],a:3,e:'주사위에는 1부터 6까지 있어요. 주사위 대결에서도 봤죠?'},
+ {q:'물고기는 무엇으로 숨을 쉴까요?',o:['아가미','코','지느러미','꼬리'],a:0,e:'물고기는 아가미로 물속에서 숨을 쉬어요.'},
+ {q:'추운 겨울에 겨울잠을 자는 동물은?',o:['참새','강아지','곰','닭'],a:2,e:'곰은 겨울 동안 굴속에서 겨울잠을 자요.'},
+ {q:'여름에 나무에서 ‘맴맴’ 우는 곤충은?',o:['매미','나비','무당벌레','개미'],a:0,e:'여름에 ‘맴맴’ 우는 곤충은 매미예요.'},
+ {q:'날개가 있어서 하늘을 나는 것은?',o:['지렁이','달팽이','잠자리','거북'],a:2,e:'잠자리는 날개가 4장 있어서 하늘을 날아요.'},
+ {q:'‘가, 나, 다, 라’ 다음에 오는 글자는?',o:['바','마','사','하'],a:1,e:'가, 나, 다, 라, 마, 바, 사… 순서예요.'},
+ {q:'우리나라의 나라꽃은?',o:['장미','해바라기','튤립','무궁화'],a:3,e:'우리나라의 나라꽃은 무궁화예요.'},
+ {q:'설날에 먹는 음식은?',o:['떡국','송편','냉면','팥빙수'],a:0,e:'설날에는 떡국을 먹어요. 송편은 추석에 먹어요.'},
+ {q:'한복은 어느 나라의 옷일까요?',o:['일본','우리나라','미국','영국'],a:1,e:'한복은 우리나라의 전통 옷이에요.'},
+ {q:'손을 깨끗하게 씻을 때 쓰는 것은?',o:['소금','풀','비누','물감'],a:2,e:'비누로 거품을 내서 손을 깨끗이 씻어요.'},
+ {q:'이를 닦을 때 쓰는 것은?',o:['빗','숟가락','연필','칫솔'],a:3,e:'칫솔에 치약을 묻혀 이를 닦아요.'},
+ {q:'세상에서 가장 큰 동물은?',o:['코끼리','대왕고래','기린','하마'],a:1,e:'바다에 사는 대왕고래(흰긴수염고래)가 가장 큰 동물이에요.'},
+ {q:'긴 코를 손처럼 쓰는 동물은?',o:['코끼리','기린','사자','토끼'],a:0,e:'코끼리는 긴 코로 물도 마시고 먹이도 집어요.'},
+ {q:'하늘을 날아다니는 탈것은?',o:['배','기차','비행기','자전거'],a:2,e:'비행기는 하늘을, 배는 물 위를, 기차는 철길을 달려요.'},
+ {q:'식물이 자라려면 꼭 필요한 것은?',o:['사탕','물','장난감','우유'],a:1,e:'식물은 물과 햇빛이 있어야 쑥쑥 자라요.'},
+ {q:'봄에 노랗게 피는 꽃은?',o:['코스모스','국화','개나리','단풍잎'],a:2,e:'개나리는 봄꽃이에요. 코스모스와 국화는 가을꽃이에요.'},
+ {q:'‘토끼와 거북이’ 이야기에서 경주에 이긴 동물은?',o:['토끼','거북이','여우','사자'],a:1,e:'거북이가 쉬지 않고 꾸준히 걸어서 이겼어요.'},
+ {q:'판다가 가장 좋아하는 먹이는?',o:['바나나','생선','대나무','당근'],a:2,e:'판다는 대나무를 아주 좋아해요.'},
+ {q:'뜨거운 사막에 살고 등에 혹이 있는 동물은?',o:['곰','낙타','펭귄','물개'],a:1,e:'낙타는 사막에 살고, 등에 혹이 있어요.'},
+ {q:'도서관에서 지켜야 할 약속은?',o:['뛰어다녀요','크게 노래해요','조용히 읽어요','책에 낙서해요'],a:2,e:'도서관에서는 조용히 책을 읽어요.'},
+ {q:'재채기가 나올 때는 어떻게 할까요?',o:['팔꿈치로 가려요','친구 쪽으로 해요','손을 흔들어요','크게 웃어요'],a:0,e:'팔꿈치(옷소매)로 가리면 친구에게 감기가 덜 옮아요.'}
+];
+
+const MISSIONS=[
+ {t:'마음이 통해요',d:'선생님이 "하나, 둘, 셋!" 하면 두 친구가 동시에 주제에 맞는 답을 말해요. 같은 답이 나오면 성공!',sec:0,topic:true},
+ {t:'등 맞대고 일어나기',d:'바닥에 등을 맞대고 앉아 팔짱을 껴요. 손을 짚지 않고 둘이 함께 일어나면 성공!',sec:30},
+ {t:'거울 놀이',d:'한 친구가 천천히 움직이면 다른 친구가 거울처럼 똑같이 따라 해요. 끝까지 잘 따라 하면 성공!',sec:20},
+ {t:'번갈아 숫자 세기',d:'둘이 번갈아 가며 1부터 20까지 말해요. 틀리지 않고 20까지 가면 성공!',sec:30},
+ {t:'손잡고 한 발로 버티기',d:'손을 꼭 잡고 둘 다 한 발로 서요. 시간이 끝날 때까지 버티면 성공!',sec:10},
+ {t:'두 나라 국기 포즈',d:'둘이 몸으로 두 나라의 국기 모양을 함께 만들어요. 시간이 끝나면 멋진 포즈로 멈춰요!',sec:30},
+ {t:'박수 리듬 따라 하기',d:'한 친구가 박수 리듬을 만들면 다른 친구가 똑같이 따라 쳐요. 역할을 바꿔서 한 번 더!',sec:30},
+ {t:'끝말잇기 다섯 번',d:'둘이 번갈아 끝말잇기를 해요. 다섯 번 이어지면 성공!',sec:40},
+ {t:'종이 위에 함께 서기',d:'신문지 한 장 위에 둘이 함께 올라가 서요. 발이 밖으로 나오지 않으면 성공!',sec:10,need:'신문지 또는 큰 종이'},
+ {t:'마주 보고 손뼉 맞추기',d:'선생님 박자에 맞춰 둘이 함께 손뼉을 쳐요. 박자를 안 놓치고 10번 이어 가면 성공!',sec:30,steps:['친구와 마주 보고 서요.','“하나!” 하면 내 두 손으로 손뼉을 짝!','“둘!” 하면 두 손바닥을 친구 손바닥에 짝!','하나, 둘, 하나, 둘… 10번 반복해요.']}
+];
+const TOPICS=['좋아하는 과일','좋아하는 동물','좋아하는 색깔','좋아하는 계절','좋아하는 간식','바다에 사는 동물','빨간색 물건','동물원에서 보고 싶은 동물','하늘에 있는 것','놀이터 놀이기구'];
+
+const CAT_AWARD={
+ dice:['행운의 나라상','주사위 대결에서 행운이 가장 많이 따랐어요.'],
+ rps:['가위바위보 장군상','가위바위보 왕국전에서 용감하게 겨뤘어요.'],
+ quiz:['척척박사상','상식 퀴즈를 척척 맞혔어요.'],
+ coop:['환상의 짝꿍상','친구와 힘을 합쳐 미션을 멋지게 해냈어요.']
+};
+const SPECIALS=[
+ ['멋진 국기상','세상에 하나뿐인 멋진 국기를 만들었어요.'],
+ ['반짝 아이디어상','재미있는 생각으로 나라를 꾸몄어요.'],
+ ['씩씩한 나라상','모든 종목에 씩씩하게 참여했어요.'],
+ ['응원 대장상','다른 나라를 신나게 응원해 주었어요.'],
+ ['웃음 가득상','올림픽을 웃음으로 가득 채웠어요.'],
+ ['멋진 매너상','이기고 져도 친구를 배려했어요.'],
+ ['끝까지 힘낸 상','마지막까지 포기하지 않았어요.'],
+ ['다정한 나라상','친구들에게 다정하게 대해 주었어요.'],
+ ['빛나는 용기상','처음 해 보는 일에도 용기를 냈어요.'],
+ ['최고 팀워크상','친구와 손발이 척척 맞았어요.']
+];
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rnd=n=>Math.floor(Math.random()*n);
+const eun=s=>{s=String(s);const c=s.charCodeAt(s.length-1);return (c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28)?'은':'는';};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;};
+
+/* ---------- state ---------- */
+function sampleNations(){
+ const L=[['고양이 왕국','서연','고양이가 대장인 나라, 낮잠 시간이 있어요'],['무지개 나라','민준','비 온 뒤에는 모두 무지개 노래를 불러요'],['초코 공화국','하윤','간식은 언제나 초콜릿!'],['공룡 나라','도윤','공룡 친구들과 함께 사는 나라'],['바다 왕국','지아','물고기와 수영하는 바다 속 나라'],['별빛 나라','시우','밤마다 별을 세는 나라'],['딸기 나라','수아','딸기 축제가 1년 내내 열려요'],['축구 왕국','이준','쉬는 시간은 무조건 축구!']];
+ return L.map((r,i)=>({id:'n'+(i+1),name:r[0],kid:r[1],intro:r[2],flag:null,sample:true,seed:i+1}));
+}
+function blankNations(k){
+ const b=Date.now().toString(36);
+ return Array.from({length:k},(_,i)=>({id:'b'+b+i,name:(i+1)+'번 나라',kid:'',intro:'',flag:null,sample:false,seed:31+i*7}));
+}
+function fresh(){return {nations:sampleNations(),scores:{},played:{dice:{},rps:{}},cer:0,quiz:null,coop:null,sound:true};}
+function load(){
+ try{const t=localStorage.getItem(KEY);if(!t)return null;const o=JSON.parse(t);if(!o||!Array.isArray(o.nations)||!o.nations.length)return null;const f=fresh();const s=Object.assign(f,o);s.played=Object.assign({dice:{},rps:{}},o.played||{});return s;}catch(e){return null;}
+}
+let S=load()||fresh();
+let warned=false,saveT=null;
+function save(){
+ try{localStorage.setItem(KEY,JSON.stringify(S));}
+ catch(e){if(!warned){warned=true;toast('브라우저에 저장하지 못했어요. 국기 그림은 이 창을 닫기 전까지만 남아 있어요.');}}
+}
+function saveSoon(){clearTimeout(saveT);saveT=setTimeout(save,400);}
+const N=id=>S.nations.find(n=>n.id===id);
+function sc(id){return S.scores[id]||(S.scores[id]={dice:0,rps:0,quiz:0,coop:0});}
+const total=id=>{const s=sc(id);return CATS.reduce((a,c)=>a+(s[c]||0),0);};
+
+let view='setup';
+let D,R;
+function resetD(){D={a:null,b:null,va:null,vb:null,result:null,rolling:0,spin:{a:false,b:false}};}
+function resetR(){R={a:null,b:null,ha:null,hb:null,wa:0,wb:0,round:null,match:null,phase:'idle'};}
+resetD();resetR();
+function resetScores(){S.scores={};S.played={dice:{},rps:{}};S.quiz=null;S.coop=null;resetD();resetR();stopTimer();}
+
+/* ---------- flags ---------- */
+const FC=['#E4473A','#F5C02E','#2C69D3','#249960','#FFFFFF','#1C2A44','#F08A24','#8C5AD3','#38B6C8','#F07AA4'];
+const flagCache={};
+function mul(seed){let t=(seed*2654435761)>>>0;return()=>{t=(t+0x6D2B79F5)>>>0;let r=Math.imul(t^(t>>>15),t|1);r^=r+Math.imul(r^(r>>>7),r|61);return((r^(r>>>14))>>>0)/4294967296;};}
+function star(g,cx,cy,R,col){g.fillStyle=col;g.beginPath();for(let i=0;i<10;i++){const rr=i%2?R*.42:R;const a=-Math.PI/2+i*Math.PI/5;g.lineTo(cx+rr*Math.cos(a),cy+rr*Math.sin(a));}g.closePath();g.fill();}
+function genFlag(seed){
+ if(flagCache[seed])return flagCache[seed];
+ const c=document.createElement('canvas');c.width=300;c.height=200;const g=c.getContext('2d');const r=mul(seed+1);
+ const pick=ex=>{let col,k=0;do{col=FC[Math.floor(r()*FC.length)];k++;}while(ex.includes(col)&&k<50);return col;};
+ const a=pick([]),b=pick([a]),d=pick([a,b]);const p=Math.floor(r()*6);
+ const rect=(col,x,y,w,h)=>{g.fillStyle=col;g.fillRect(x,y,w,h);};
+ if(p===0){rect(a,0,0,300,67);rect(b,0,67,300,67);rect(d,0,134,300,66);}
+ else if(p===1){rect(a,0,0,100,200);rect(b,100,0,100,200);rect(d,200,0,100,200);}
+ else if(p===2){rect(a,0,0,300,200);g.fillStyle=b;g.beginPath();g.arc(150,100,58,0,Math.PI*2);g.fill();}
+ else if(p===3){rect(a,0,0,300,200);rect(d,0,160,300,40);star(g,150,88,62,b);}
+ else if(p===4){rect(a,0,0,300,200);g.fillStyle=b;g.beginPath();g.moveTo(0,200);g.lineTo(300,0);g.lineTo(300,200);g.fill();g.fillStyle=d;g.beginPath();g.arc(78,62,32,0,Math.PI*2);g.fill();}
+ else{rect(a,0,0,300,200);rect(b,88,0,44,200);rect(b,0,78,300,44);}
+ return flagCache[seed]=c.toDataURL('image/png');
+}
+const flagSrc=n=>n.flag||genFlag(n.seed);
+function readImage(file){
+ return new Promise((res,rej)=>{
+  if(!file||!/^image\//.test(file.type))return rej(new Error('type'));
+  const fr=new FileReader();fr.onerror=()=>rej(fr.error);
+  fr.onload=()=>{const img=new Image();img.onload=()=>{const max=640;let w=img.naturalWidth,h=img.naturalHeight;const s=Math.min(1,max/Math.max(w,h));w=Math.max(1,Math.round(w*s));h=Math.max(1,Math.round(h*s));const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.fillStyle='#FFFFFF';g.fillRect(0,0,w,h);g.drawImage(img,0,0,w,h);res(c.toDataURL('image/jpeg',.86));};img.onerror=()=>rej(new Error('img'));img.src=fr.result;};
+  fr.readAsDataURL(file);
+ });
+}
+async function setFlag(id,file){
+ const n=N(id);if(!n)return;
+ try{n.flag=await readImage(file);n.sample=false;save();render();renderBunting();toast(n.name+' 국기를 올렸어요.');}
+ catch(e){toast('그림 파일(JPG, PNG)만 올릴 수 있어요.');}
+}
+
+/* ---------- sound & fx ---------- */
+let ac=null;
+function actx(){if(!S.sound)return null;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();return ac;}catch(e){return null;}}
+function tone(f,d,w,type,v){const a=actx();if(!a)return;d=d||.15;w=w||0;const t=a.currentTime+w;const o=a.createOscillator(),gn=a.createGain();o.type=type||'triangle';o.frequency.value=f;gn.gain.setValueAtTime(.0001,t);gn.gain.exponentialRampToValueAtTime(v||.18,t+.02);gn.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(gn).connect(a.destination);o.start(t);o.stop(t+d+.05);}
+const sfx={
+ tick:()=>tone(700+rnd(300),.05,0,'square',.04),
+ roll:p=>tone(520+p*560,.05,0,'square',.05),
+ land:()=>{tone(196,.3,0,'triangle',.32);tone(392,.18,.04,'triangle',.18);},
+ pop:()=>tone(660,.12),
+ boop:()=>{tone(392,.15);tone(330,.25,.15);},
+ fanfare:()=>{[523,659,784,1047].forEach((f,i)=>tone(f,i===3?.55:.18,i*.14));},
+ bell:()=>{[0,1,2].forEach(i=>tone(1047,.3,i*.35,'sine',.25));}
+};
+function speak(t){if(!S.sound)return;try{const ss=window.speechSynthesis;if(!ss)return;ss.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ko-KR';u.rate=.9;const v=ss.getVoices().find(x=>/^ko/i.test(x.lang));if(v)u.voice=v;ss.speak(u);}catch(e){}}
+const reduce=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+/* richer ceremony audio */
+let master=null;
+function out(a){if(!master){master=a.createDynamicsCompressor();master.threshold.value=-14;master.ratio.value=6;master.connect(a.destination);}return master;}
+function noiseBuf(a){if(!noiseBuf.b){const n=a.sampleRate*2,b=a.createBuffer(1,n,a.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;noiseBuf.b=b;}return noiseBuf.b;}
+function hit(a,t,dur,ft,f,q,v){const s=a.createBufferSource();s.buffer=noiseBuf(a);const fl=a.createBiquadFilter();fl.type=ft;fl.frequency.value=f;fl.Q.value=q;const g=a.createGain();g.gain.setValueAtTime(Math.max(v,.0002),t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);s.connect(fl).connect(g).connect(out(a));s.start(t,Math.random()*1.5);s.stop(t+dur+.02);}
+function boom(a,t,f,d,v){const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(f*1.6,t);o.frequency.exponentialRampToValueAtTime(f,t+.12);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(out(a));o.start(t);o.stop(t+d+.05);}
+function brass(a,f,t,d,v){const o=a.createOscillator(),o2=a.createOscillator(),fl=a.createBiquadFilter(),g=a.createGain();o.type='sawtooth';o2.type='sawtooth';o.frequency.value=f;o2.frequency.value=f*1.005;fl.type='lowpass';fl.frequency.setValueAtTime(f*1.5,t);fl.frequency.linearRampToValueAtTime(f*6,t+.07);fl.frequency.linearRampToValueAtTime(f*3,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.03);g.gain.setValueAtTime(v,t+d*.75);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(fl);o2.connect(fl);fl.connect(g).connect(out(a));o.start(t);o2.start(t);o.stop(t+d+.05);o2.stop(t+d+.05);}
+function bell(a,f,t,d,v){const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.005);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(out(a));o.start(t);o.stop(t+d+.05);}
+const show={
+ drumroll(dur){const a=actx();if(!a)return;const t0=a.currentTime+.02;for(let t=0;t<dur;t+=.045){const p=t/dur;hit(a,t0+t,.07,'bandpass',1800,.8,.05+p*.3);if(rnd(3)===0)boom(a,t0+t,90,.08,.06+p*.12);}
+  const te=t0+dur;hit(a,te,1.8,'highpass',3500,.4,.55);boom(a,te,55,1.0,.9);},
+ fanfare(){const a=actx();if(!a)return;const t=a.currentTime+.03;const v=.1;
+  [[392,0,.14],[523,.15,.14],[659,.3,.14],[784,.45,.38],[659,.86,.13],[784,1.0,.13]].forEach(n=>brass(a,n[0],t+n[1],n[2],v));
+  [523,659,784,1047].forEach(f=>brass(a,f,t+1.15,1.5,.075));boom(a,t,70,.5,.6);boom(a,t+1.15,60,.9,.8);hit(a,t+1.15,1.4,'highpass',4000,.4,.3);
+  [2093,2637,3136].forEach((f,i)=>bell(a,f,t+1.2+i*.09,.9,.08));},
+ applause(dur,v){const a=actx();if(!a)return;const t0=a.currentTime+.05;const n=Math.round(dur*70);for(let i=0;i<n;i++){const x=Math.random();const env=Math.min(1,x*dur/.35)*(x>.55?Math.max(.05,(1-x)/.45):1);hit(a,t0+x*dur,.04+Math.random()*.05,'bandpass',900+Math.random()*2200,1.1,(v||.4)*env*(.5+Math.random()*.5));}},
+ finale(){const a=actx();if(!a)return;const t=a.currentTime+.03;let at=0;
+  [[523,.22],[659,.22],[784,.22],[1047,.44],[988,.22],[784,.22],[880,.22],[988,.44],[1047,.22],[1175,.22],[1319,.7]].forEach(n=>{brass(a,n[0],t+at,n[1]*.95,.1);if(at===0||n[1]>.4)boom(a,t+at,70,.4,.5);at+=n[1];});
+  [523,659,784,1047,1319].forEach(f=>brass(a,f,t+at,2.2,.065));boom(a,t+at,55,1.4,.9);hit(a,t+at,2.2,'highpass',3500,.4,.5);
+  for(let i=0;i<8;i++)bell(a,[1568,2093,2637,3136][i%4],t+at+.1+i*.11,.8,.07);}
+};
+/* confetti: shared particle pool so bursts can overlap */
+const FX={ps:[],run:false};
+function confetti(n,from){
+ if(reduce)return;const c=$('#fx');if(!FX.run){c.width=innerWidth;c.height=innerHeight;}
+ const W=c.width,H=c.height,cols=['#E4473A','#F5C02E','#2C69D3','#249960','#F07AA4','#8C5AD3'];n=n||150;from=from||'center';
+ for(let i=0;i<n&&FX.ps.length<900;i++){let p;const r=Math.random;
+  if(from==='left')p={x:-10,y:H*.75,vx:8+r()*16,vy:-14-r()*14,gr:.42};
+  else if(from==='right')p={x:W+10,y:H*.75,vx:-8-r()*16,vy:-14-r()*14,gr:.42};
+  else if(from==='top')p={x:r()*W,y:-20-r()*H*.5,vx:(r()-.5)*3,vy:2+r()*3,gr:.05};
+  else p={x:W/2+(r()-.5)*W*.4,y:H*.4,vx:(r()-.5)*18,vy:-r()*17-4,gr:.45};
+  p.s=7+r()*9;p.r=r()*6;p.vr=(r()-.5)*.3;p.c=cols[rnd(cols.length)];FX.ps.push(p);}
+ if(!FX.run){FX.run=true;c.hidden=false;const g=c.getContext('2d');
+  (function step(){g.clearRect(0,0,c.width,c.height);FX.ps=FX.ps.filter(p=>p.y<c.height+40&&p.x>-60&&p.x<c.width+60);
+   FX.ps.forEach(p=>{p.vy+=p.gr;p.vx*=.99;if(p.gr<.1)p.vx+=Math.sin(p.y/40)*.08;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;g.save();g.translate(p.x,p.y);g.rotate(p.r);g.fillStyle=p.c;g.fillRect(-p.s/2,-p.s/3,p.s,p.s*.66);g.restore();});
+   if(FX.ps.length)requestAnimationFrame(step);else{g.clearRect(0,0,c.width,c.height);c.hidden=true;FX.run=false;}})();}
+}
+function celebrate(){sfx.fanfare();confetti();}
+let tt;function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(tt);tt=setTimeout(()=>{el.hidden=true;},2800);}
+let modalFn=null;
+function ask(msg,yes,fn){modalFn=fn;const m=$('#modal');m.innerHTML=`<div class="modal-box" role="dialog" aria-modal="true"><p>${esc(msg)}</p><div class="row"><button class="btn danger" data-act="modalYes">${esc(yes)}</button><button class="btn ghost" data-act="modalNo">취소</button></div></div>`;m.hidden=false;}
+
+/* ---------- header ---------- */
+function buildNav(){$('#steps').innerHTML=VIEWS.map((v,i)=>`<button class="step" data-act="nav" data-v="${v[0]}"><i>${i+1}</i>${v[1]}</button>`).join('');}
+function renderNav(){document.querySelectorAll('.step').forEach(b=>{const on=b.dataset.v===view;b.classList.toggle('on',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});}
+function renderTools(){const b=$('#soundBtn');b.textContent=S.sound?'소리 켜짐':'소리 꺼짐';b.setAttribute('aria-pressed',S.sound?'true':'false');}
+function renderBunting(){
+ const el=$('#buntingIn');const ns=S.nations,k=ns.length;
+ const Y=t=>(1-t)*(1-t)*6+2*(1-t)*t*44+t*t*6;
+ el.innerHTML=`<svg viewBox="0 0 100 84" preserveAspectRatio="none" aria-hidden="true"><path d="M0,6 Q50,44 100,6"/></svg>`+ns.map((n,i)=>{const t=(i+1)/(k+1);return `<button class="pennant" data-act="pennant" data-i="${i}" title="${esc(n.name)}" style="left:${(t*100).toFixed(2)}%;top:${(Y(t)/84*100).toFixed(2)}%;transform:translate(-50%,0) rotate(${((1-2*t)*7).toFixed(1)}deg)"><img src="${flagSrc(n)}" alt="${esc(n.name)}"></button>`;}).join('');
+}
+
+/* ---------- views ---------- */
+function vSetup(){
+ const hasSample=S.nations.some(n=>n.sample);
+ return `<section class="page">
+ <div class="pagehead"><div><p class="eyebrow">1단계 · 나라 만들기</p><h1>우리 반 나라를 등록해요</h1><p class="lead">AI로 다듬은 국기 그림을 칸마다 올려 주세요. 국기 칸을 누르거나 그림 파일을 끌어다 놓으면 돼요. 입력한 내용은 이 컴퓨터의 브라우저에 저장돼요.</p></div>
+ <div class="headtools">${S.nations.length<10?'<button class="btn ghost" data-act="addNation">+ 나라 칸 추가</button>':''}<button class="btn ghost" data-act="newBlank">빈 칸 8개로 새로 시작</button></div></div>
+ ${hasSample?'<div class="notice"><strong>지금은 예시 나라예요.</strong> 이름을 고치거나 국기를 올리면 그 칸은 우리 반 나라가 돼요. 한꺼번에 비우려면 오른쪽 위 ‘빈 칸 8개로 새로 시작’을 눌러 주세요.</div>':''}
+ <div class="nation-grid">${S.nations.map(cardSetup).join('')}</div>
+ </section>`;
+}
+function cardSetup(n,i){
+ return `<article class="ncard">
+  <label class="flagdrop ${n.flag?'':'empty'}" for="file-${n.id}" data-drop="${n.id}">
+   <img src="${flagSrc(n)}" alt="${esc(n.name)} 국기">
+   <span class="dropcue">${n.flag?'국기 바꾸기':'국기 그림 올리기'}</span>
+   ${n.flag?'':'<span class="tag">임시 국기</span>'}
+  </label>
+  <input type="file" id="file-${n.id}" accept="image/*" data-file="${n.id}" hidden>
+  <div class="fields">
+   <label class="f"><span>나라 이름</span><input id="name-${n.id}" data-field="name" data-id="${n.id}" value="${esc(n.name)}" maxlength="14"></label>
+   <label class="f"><span>대표 친구</span><input id="kid-${n.id}" data-field="kid" data-id="${n.id}" value="${esc(n.kid)}" maxlength="8" placeholder="이름"></label>
+   <label class="f"><span>한마디 소개</span><input id="intro-${n.id}" data-field="intro" data-id="${n.id}" value="${esc(n.intro)}" maxlength="40" placeholder="우리 나라 자랑 한 가지"></label>
+  </div>
+  <div class="cardfoot"><span class="num">${i+1}</span>${n.flag?`<button class="link" data-act="clearFlag" data-id="${n.id}">국기 지우기</button>`:''}${S.nations.length>2?`<button class="link danger" data-act="removeNation" data-id="${n.id}">이 칸 빼기</button>`:''}</div>
+ </article>`;
+}
+
+function vCeremony(){
+ const ns=S.nations;S.cer=Math.min(Math.max(0,S.cer||0),ns.length-1);const i=S.cer,n=ns[i];
+ return `<section class="page">
+ <div class="pagehead"><div><p class="eyebrow">2단계 · 건국 선포식</p><h1>${i+1}번째 나라를 소개합니다</h1></div><div class="headtools"><span class="qcount">${i+1} <small>/ ${ns.length}</small></span></div></div>
+ <div class="stage-body">
+  <div class="bigflag"><div class="flagframe"><img src="${flagSrc(n)}" alt="${esc(n.name)} 국기"></div></div>
+  <div class="stage-text">
+   <p class="kicker">새로운 나라가 태어났어요!</p>
+   <h2 class="nation-title">${esc(n.name)}</h2>
+   ${n.kid?`<p class="founder">대표 친구 <strong>${esc(n.kid)}</strong></p>`:''}
+   ${n.intro?`<p class="intro">“${esc(n.intro)}”</p>`:''}
+   <div class="row" style="margin-top:10px"><button class="btn big primary" data-act="cerCheer">축하해요!</button><button class="btn" data-act="cerSpeak">소개 읽어주기</button></div>
+  </div>
+ </div>
+ <div class="stage-nav">
+  <button class="btn" data-act="cerPrev" ${i===0?'disabled':''}>← 앞 나라</button>
+  <div class="thumbs">${ns.map((x,j)=>`<button class="thumb ${j===i?'on':''}" data-act="cerGo" data-i="${j}" aria-label="${esc(x.name)}"><img src="${flagSrc(x)}" alt=""></button>`).join('')}</div>
+  <button class="btn" data-act="cerNext" ${i===ns.length-1?'disabled':''}>다음 나라 →</button>
+ </div>
+ </section>`;
+}
+
+const PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+function dieFace(v){if(v==null)return '<b class="dq">?</b>';return Array.from({length:9},(_,k)=>`<span class="${PIPS[v].includes(k)?'on':''}"></span>`).join('');}
+function arena(mode,side){
+ const st=mode==='dice'?D:R;const n=N(st[side]);
+ if(!n)return `<div class="arena empty"><div class="flagframe ph"><span>아래에서<br>나라를 골라 주세요</span></div><p class="aname">?</p></div>`;
+ const won=mode==='dice'?D.result===side:R.match===side;
+ let inner='';
+ if(mode==='dice'){
+  inner=`<div class="die ${D.spin[side]?'rolling':''}" id="die-${side}">${dieFace(D.spin[side]?1+rnd(6):D['v'+side])}</div><p class="dnum" aria-live="polite">${D['v'+side]!=null?D['v'+side]:''}</p><button class="btn" data-act="rollOne" data-side="${side}" ${D['v'+side]!=null||D.result||D.rolling?'disabled':''}>굴리기</button>`;
+ }else{
+  const h=R['h'+side],w=R['w'+side];
+  inner=`<div class="wins" aria-label="${w}판 이김">${[0,1].map(k=>`<span class="${k<w?'on':''}"></span>`).join('')}</div>
+  <div class="hand-show">${h?HANDS[h].e:'<span class="dq">?</span>'}</div>
+  <div class="hands">${['scissors','rock','paper'].map(k=>`<button class="hbtn ${h===k?'on':''}" data-act="hand" data-side="${side}" data-h="${k}" ${R.phase!=='choose'?'disabled':''}><span>${HANDS[k].e}</span>${HANDS[k].n}</button>`).join('')}</div>`;
+ }
+ return `<div class="arena ${won?'win':''}">${won?'<div class="crown">승리!</div>':''}<div class="flagframe"><img src="${flagSrc(n)}" alt="${esc(n.name)} 국기"></div><p class="aname">${esc(n.name)}</p>${n.kid?`<p class="akid">${esc(n.kid)}</p>`:''}${inner}</div>`;
+}
+function picker(mode,sel,busy){
+ return `<div class="picker"><p class="pk-label">대결할 나라 고르기<span>숫자는 지금까지 대결한 횟수예요. 적게 한 나라부터 골라 주세요.</span></p><div class="chips">${S.nations.map(n=>`<button class="chip ${sel.includes(n.id)?'on':''}" data-act="pick" data-mode="${mode}" data-id="${n.id}" ${busy?'disabled':''}><img src="${flagSrc(n)}" alt=""><span>${esc(n.name)}</span><em>${S.played[mode][n.id]||0}판</em></button>`).join('')}</div></div>`;
+}
+function vDice(){
+ let ctr;
+ if(D.result==='tie')ctr='<button class="btn big primary" data-act="diceAgain">다시 굴리기</button>';
+ else if(D.result)ctr='<button class="btn big" data-act="diceNext">다음 대결</button>';
+ else ctr=`<button class="btn big primary" data-act="rollBoth" ${!(D.a&&D.b)||D.rolling?'disabled':''}>같이 굴리기!</button>`;
+ let msg;
+ if(!D.a||!D.b)msg='아래에서 대결할 나라 두 개를 골라 주세요.';
+ else if(D.result==='tie')msg=`둘 다 ${D.va}! 비겼어요. 한 번 더 굴려요.`;
+ else if(D.result)msg=`<b>${esc(N(D[D.result]).name)}</b> 승리! 별 하나를 받아요.`;
+ else if(D.va!=null&&D.vb!=null)msg='두구두구… 과연 결과는?';
+ else if(D.spin.a||D.spin.b){const dn=D.va!=null?'a':(D.vb!=null?'b':null);if(dn){const o=dn==='a'?'b':'a',x=N(D[dn]).name,y=N(D[o]).name;msg=`<b>${esc(x)}</b>${eun(x)} ${D['v'+dn]}! 과연 <b>${esc(y)}</b>${eun(y)}?`;}else msg='두근두근… 어떤 숫자가 나올까요?';}
+ else if(D.va!=null||D.vb!=null)msg='이제 다른 나라도 굴려 볼까요?';
+ else msg='주사위를 굴려요. 큰 숫자가 나온 나라가 이겨요!';
+ return `<section class="page">
+ <div class="pagehead"><div><p class="eyebrow">나라 올림픽 1종목</p><h1>주사위 대결</h1></div><div class="headtools"><button class="btn ghost" data-act="randPair" data-mode="dice" ${D.rolling?'disabled':''}>랜덤 대결 뽑기</button></div></div>
+ <div class="versus">${arena('dice','a')}<div class="vs"><span class="vs-label">VS</span>${ctr}</div>${arena('dice','b')}</div>
+ <p class="resultline">${msg}</p>
+ ${picker('dice',[D.a,D.b],D.rolling>0)}
+ </section>`;
+}
+function vRps(){
+ let ctr;
+ const both=R.a&&R.b;
+ if(R.phase==='matchEnd')ctr='<button class="btn big" data-act="rpsNext">다음 대결</button>';
+ else if(R.phase==='roundEnd')ctr=`<button class="btn big primary" data-act="rpsGo">${R.round==='tie'?'다시 한 번!':'다음 판'}</button>`;
+ else if(R.phase==='choose'||R.phase==='count')ctr='<button class="btn big" disabled>손을 골라요</button>';
+ else ctr=`<button class="btn big primary" data-act="rpsGo" ${both?'':'disabled'}>가위! 바위! 보!</button>`;
+ let msg;
+ if(!both)msg='아래에서 대결할 나라 두 개를 골라 주세요.';
+ else if(R.phase==='idle')msg='세 판 중 두 판을 먼저 이기면 승리! 준비되면 버튼을 눌러요.';
+ else if(R.phase==='choose')msg='두 친구가 낸 손을 각각 눌러 주세요.';
+ else if(R.phase==='roundEnd')msg=R.round==='tie'?'비겼어요! 한 번 더 해요.':`<b>${esc(N(R[R.round]).name)}</b> 이번 판 승! 다음 판으로 가요.`;
+ else if(R.phase==='matchEnd')msg=`<b>${esc(N(R[R.match]).name)}</b> 승리! 별 하나를 받아요.`;
+ else msg='';
+ return `<section class="page">
+ <div class="pagehead"><div><p class="eyebrow">나라 올림픽 2종목</p><h1>가위바위보 왕국전</h1></div><div class="headtools"><button class="btn ghost" data-act="randPair" data-mode="rps" ${R.phase==='count'?'disabled':''}>랜덤 대결 뽑기</button></div></div>
+ <div class="versus">${arena('rps','a')}<div class="vs"><span class="vs-label">VS</span><div class="score"><b>${R.wa}</b><i>:</i><b>${R.wb}</b></div><small>3판 2승</small>${ctr}</div>${arena('rps','b')}</div>
+ <p class="resultline">${msg}</p>
+ ${picker('rps',[R.a,R.b],R.phase==='count')}
+ </section>`;
+}
+
+function ensureQuiz(){if(!S.quiz||S.quiz.v!==QV||!Array.isArray(S.quiz.order)||S.quiz.order.some(x=>!QS[x]))S.quiz={v:QV,order:shuffle(QS.map((_,i)=>i)),i:0,revealed:false,picked:[]};}
+function vQuiz(){
+ ensureQuiz();const Q=S.quiz,tot=Q.order.length;
+ if(Q.i>=tot)return `<section class="page"><div class="qcard"><p class="eyebrow">나라 올림픽 3종목</p><h1>문제를 모두 풀었어요!</h1><p class="lead">메달판에서 퀴즈 별을 확인해 보세요.</p><div class="qactions"><button class="btn big primary" data-act="qRestart">문제 섞어서 다시 하기</button><button class="btn big" data-act="nav" data-v="awards">메달판 보기</button></div></div></section>`;
+ const q=QS[Q.order[Q.i]];
+ return `<section class="page">
+ <div class="pagehead"><div><p class="eyebrow">나라 올림픽 3종목 · 1학년 상식</p><h1>상식 퀴즈</h1><p class="lead">정답 번호를 손가락으로 보여 주세요. 맞힌 나라는 별 하나!</p></div>
+ <div class="headtools"><span class="qcount">${Q.i+1} <small>/ ${tot}</small></span><button class="btn ghost" data-act="qSpeak">문제 읽어주기</button>${Q.revealed?'':'<button class="btn ghost" data-act="qSkip">이 문제 넘기기</button>'}</div></div>
+ <div class="qcard"><p class="qtext">${esc(q.q)}</p></div>
+ <div class="opts ${Q.revealed?'revealed':''}">${q.o.map((o,k)=>`<div class="opt o${k+1} ${Q.revealed&&k===q.a?'right':''}"><b>${k+1}</b><span>${esc(o)}</span>${Q.revealed&&k===q.a?'<em class="mark">정답!</em>':''}</div>`).join('')}</div>
+ ${Q.revealed?`<p class="explain" style="text-align:center">${esc(q.e)}</p>
+  <div class="picker"><p class="pk-label">맞힌 나라를 모두 눌러 주세요<span>${Q.picked.length}개 나라 선택</span></p><div class="chips">${S.nations.map(n=>`<button class="chip ${Q.picked.includes(n.id)?'on':''}" data-act="qPick" data-id="${n.id}"><img src="${flagSrc(n)}" alt=""><span>${esc(n.name)}</span></button>`).join('')}</div></div>
+  <div class="qactions"><button class="btn ghost" data-act="qAll">모두 맞혔어요</button><button class="btn big primary" data-act="qAward">별 주고 다음 문제 →</button></div>`
+ :`<div class="qactions"><button class="btn big primary" data-act="qReveal">정답 공개!</button></div>`}
+ </section>`;
+}
+
+function makeTeams(ids){const s=shuffle(ids),t=[];for(let i=0;i+1<s.length;i+=2)t.push([s[i],s[i+1]]);if(s.length%2){if(t.length)t[t.length-1].push(s[s.length-1]);else t.push([s[s.length-1]]);}return t;}
+function ensureCoop(){
+ const ids=S.nations.map(n=>n.id);const C=S.coop;
+ const flat=C&&Array.isArray(C.teams)?[].concat(...C.teams):[];
+ const ok=C&&flat.length===ids.length&&flat.every(id=>ids.includes(id));
+ if(!ok){S.coop={teams:makeTeams(ids),m:null,topic:'',used:[],res:{}};stopTimer();T.total=T.left=0;}
+}
+const T={total:0,left:0,running:false,iv:null};
+function stopTimer(){clearInterval(T.iv);T.iv=null;T.running=false;}
+function tToggle(){
+ if(T.running){stopTimer();updT();return;}
+ if(T.left<=0)T.left=T.total;
+ T.running=true;sfx.pop();
+ T.iv=setInterval(()=>{T.left--;if(T.left<=3&&T.left>0)tone(880,.1);if(T.left<=0){T.left=0;stopTimer();sfx.bell();}updT();},1000);
+ updT();
+}
+function tReset(){stopTimer();T.left=T.total;updT();}
+function updT(){
+ const num=$('#tNum'),ring=$('#tRing'),btn=$('#tBtn'),msg=$('#tMsg');if(!num)return;
+ const C=2*Math.PI*54;num.textContent=T.left;ring.style.strokeDashoffset=T.total?(C*(1-T.left/T.total)).toFixed(2):0;
+ const done=T.left<=0&&T.total>0;
+ btn.textContent=T.running?'잠깐 멈춤':(done?'다시 시작':(T.left<T.total?'계속':'시작!'));
+ msg.textContent=done?'시간 끝!':'초';
+ num.closest('.timer').classList.toggle('done',done);
+}
+function vCoop(){
+ ensureCoop();const C=S.coop;const m=C.m!=null?MISSIONS[C.m]:null;
+ const teams=C.teams.map((t,i)=>{const r=C.res[i];return `<article class="team ${r==='ok'?'ok':''}">
+  <p class="tlabel">${i+1}팀</p>
+  <div class="tflags">${t.map(id=>{const n=N(id);return `<figure><div class="flagframe sm"><img src="${flagSrc(n)}" alt=""></div><figcaption>${esc(n.name)}</figcaption></figure>`;}).join('<span class="plus">+</span>')}</div>
+  <div class="tbtns"><button class="btn ok ${r==='ok'?'on':''}" data-act="teamRes" data-i="${i}" data-v="ok" ${m?'':'disabled'}>${r==='ok'?'성공 ✓':'성공!'}</button><button class="btn ghost ${r==='no'?'on':''}" data-act="teamRes" data-i="${i}" data-v="no" ${m?'':'disabled'}>아쉬워요</button></div>
+ </article>`;}).join('');
+ const opts=`<option value="">미션 직접 고르기</option>`+MISSIONS.map((x,k)=>`<option value="${k}" ${C.m===k?'selected':''}>${esc(x.t)}</option>`).join('');
+ const C2=2*Math.PI*54;
+ return `<section class="page">
+ <div class="pagehead"><div><p class="eyebrow">나라 올림픽 4종목</p><h1>협동 미션</h1><p class="lead">두 나라가 한 팀이 되어 미션에 도전해요. 성공한 팀은 두 나라 모두 별을 받아요.</p></div><div class="headtools"><button class="btn ghost" data-act="coopShuffle">짝 새로 뽑기</button></div></div>
+ <div class="mission">
+  <div class="mcard">
+   ${m?`<p class="eyebrow">이번 미션${m.sec?` · ${m.sec}초`:''}</p><h2>${esc(m.t)}</h2><p class="mdesc">${esc(m.d)}</p>${m.steps?`<ol class="msteps">${m.steps.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`:''}${m.need?`<p class="need">준비물 · ${esc(m.need)}</p>`:''}${m.topic?`<div class="topic"><span>주제</span><strong>${esc(C.topic)}</strong><button class="btn ghost sm" data-act="topicNext">다른 주제</button></div>`:''}`
+   :`<p class="eyebrow">미션 준비</p><h2>어떤 미션이 나올까요?</h2><p class="mdesc">아래 팀을 확인하고 ‘미션 뽑기’를 눌러 주세요. 모든 팀이 동시에 도전해요.</p>`}
+   <div class="row"><button class="btn big primary" data-act="mDraw">${m?'다른 미션 뽑기':'미션 뽑기!'}</button><label class="msel" for="mSel"><span class="sr">또는</span><select id="mSel">${opts}</select></label></div>
+  </div>
+  ${m&&m.sec?`<div class="tbox"><div class="timer"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="tr-bg" cx="60" cy="60" r="54"/><circle id="tRing" class="tr-fg" cx="60" cy="60" r="54" stroke-dasharray="${C2.toFixed(2)}"/></svg><div class="tnum"><b id="tNum">${T.left}</b><small id="tMsg">초</small></div></div><div class="row"><button id="tBtn" class="btn primary" data-act="tToggle">시작!</button><button class="btn ghost" data-act="tReset">처음으로</button></div></div>`:''}
+ </div>
+ <div class="teams">${teams}</div>
+ </section>`;
+}
+function setMission(k){
+ const C=S.coop;C.m=k;if(!C.used.includes(k))C.used.push(k);C.res={};
+ C.topic=MISSIONS[k].topic?TOPICS[rnd(TOPICS.length)]:'';
+ stopTimer();T.total=T.left=MISSIONS[k].sec||0;save();render();sfx.pop();
+}
+
+function vAwards(){
+ const rows=S.nations.map(n=>{const s=sc(n.id);return `<tr><td class="nm"><div class="nmc"><img src="${flagSrc(n)}" alt=""><div><strong>${esc(n.name)}</strong>${n.kid?`<small>${esc(n.kid)}</small>`:''}</div></div></td>${CATS.map(c=>`<td><div class="adj"><button data-act="adj" data-id="${n.id}" data-c="${c}" data-d="-1" aria-label="${esc(n.name)} ${CATN[c]} 별 빼기">−</button><b>${s[c]}</b><button data-act="adj" data-id="${n.id}" data-c="${c}" data-d="1" aria-label="${esc(n.name)} ${CATN[c]} 별 더하기">+</button></div></td>`).join('')}<td class="total">★ ${total(n.id)}</td></tr>`;}).join('');
+ return `<section class="page">
+ <div class="pagehead"><div><p class="eyebrow">마무리</p><h1>메달판</h1><p class="lead">순위를 매기지 않고, 모든 나라가 상장을 하나씩 받아요. 별이 잘못 들어갔다면 − + 버튼으로 고칠 수 있어요.</p></div><div class="headtools"><button class="btn ghost" data-act="scoreReset">별 모두 지우기</button></div></div>
+ <div class="board-wrap"><table><thead><tr><th class="l">나라</th>${CATS.map(c=>`<th>${CATN[c]}</th>`).join('')}<th>모은 별</th></tr></thead><tbody>${rows}</tbody></table></div>
+ <div class="awardbar"><div><h2>시상식을 시작할까요?</h2><p>나라마다 상장을 하나씩 보여 주고, 마지막에 모두 함께 평화 조약을 맺어요.</p></div><button class="btn big primary" data-act="awardStart">시상식 시작!</button></div>
+ </section>`;
+}
+
+/* ---------- awards ceremony ---------- */
+let AW={list:[],i:0};
+function computeAwards(){
+ const ns=S.nations,out={};
+ CATS.forEach(c=>{let best=null;ns.forEach(n=>{if(out[n.id])return;const v=sc(n.id)[c]||0;if(v<=0)return;const t=total(n.id);if(!best||v>best.v||(v===best.v&&t>best.t))best={id:n.id,v,t};});if(best)out[best.id]={title:CAT_AWARD[c][0],desc:CAT_AWARD[c][1]};});
+ const sp=shuffle(SPECIALS);let k=0;
+ ns.forEach(n=>{if(!out[n.id]){const s=sp[k++%sp.length];out[n.id]={title:s[0],desc:s[1]};}});
+ return ns.map(n=>Object.assign({id:n.id},out[n.id]));
+}
+function renderAw(){
+ const ov=$('#stageov');const ns=S.nations;
+ if(AW.i<AW.list.length&&!AW.reveal){
+  ov.innerHTML=`<div class="ov-inner gut"><div class="cert suspense" role="status"><p class="cert-no">제 ${AW.i+1} 호</p><span class="medal spin" aria-hidden="true"></span><h2 class="sus-title">두구두구…</h2><p class="cert-body">이번 상장은 어느 나라가 받을까요?</p></div><div class="ov-nav"><span>${AW.i+1} / ${AW.list.length}</span><button class="btn big primary" disabled>잠깐만요…</button><button class="btn ghost" data-act="awClose">닫기</button></div></div>`;
+ }else if(AW.i<AW.list.length){
+  const x=AW.list[AW.i],n=N(x.id);const d=new Date();
+  ov.innerHTML=`<div class="ov-inner gut"><div class="cert" role="dialog" aria-label="${esc(n.name)} 상장">
+   <p class="cert-no">제 ${AW.i+1} 호</p>
+   <h2 class="cert-title">상장</h2>
+   <p class="award-name"><span class="medal" aria-hidden="true"></span>${esc(x.title)}</p>
+   <div class="flagframe cert-flag"><img src="${flagSrc(n)}" alt="${esc(n.name)} 국기"></div>
+   <p class="cert-nation">${esc(n.name)}</p>${n.kid?`<p class="cert-kid">대표 ${esc(n.kid)}</p>`:''}
+   <p class="cert-body">위 나라는 ${esc(x.desc)} 이에 이 상장을 드립니다.</p>
+   <div class="cert-foot"><p class="cert-stars">모은 별 ★ ${total(n.id)}개</p><p class="cert-date">${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일<br><strong>우리 반 나라 올림픽 위원회</strong></p></div>
+  </div>
+  <div class="ov-nav"><span>${AW.i+1} / ${AW.list.length}</span><button class="btn big primary" data-act="awNext">${AW.i===AW.list.length-1?'평화 조약 맺기 →':'다음 상장 →'}</button><button class="btn ghost" data-act="awClose">닫기</button></div></div>`;
+ }else{
+  ov.innerHTML=`<div class="ov-inner gut"><div class="ring"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40"/></svg>
+   ${ns.map((n,k)=>{const a=(-90+k*360/ns.length)*Math.PI/180;return `<div class="ring-flag" style="left:${(50+40*Math.cos(a)).toFixed(2)}%;top:${(50+40*Math.sin(a)).toFixed(2)}%;animation-delay:${(k*.12).toFixed(2)}s"><div class="flagframe sm"><img src="${flagSrc(n)}" alt=""></div><span>${esc(n.name)}</span></div>`;}).join('')}
+   <div class="ring-center"><p class="eyebrow">평화 조약</p><h2>우리 반 연합</h2><p>${ns.length}개 나라가 모두 친구가 되었어요</p></div>
+  </div><div class="ov-nav"><button class="btn big" data-act="awClose">수업 마치기</button></div></div>`;
+ }
+ ov.scrollTop=0;
+}
+
+function awShow(){
+ const tok=++AW.tok;const live=()=>tok===AW.tok&&!$('#stageov').hidden;
+ if(AW.i>=AW.list.length){AW.reveal=true;renderAw();show.finale();show.applause(5,.45);confetti(180);
+  setTimeout(()=>{if(!live())return;confetti(120,'left');confetti(120,'right');},700);
+  setTimeout(()=>{if(!live())return;confetti(220,'top');},2000);
+  setTimeout(()=>{if(live())speak('우리 반 연합, 만세!');},4600);return;}
+ AW.reveal=false;renderAw();show.drumroll(1.8);
+ setTimeout(()=>{if(!live())return;AW.reveal=true;renderAw();show.fanfare();show.applause(3.4,.4);confetti(170);
+  setTimeout(()=>{if(!live())return;confetti(90,'left');confetti(90,'right');},400);
+  const x=AW.list[AW.i],n=N(x.id);setTimeout(()=>{if(live())speak(`${n.name}! ${x.title}!`);},2700);},1850);
+}
+/* ---------- actions ---------- */
+function render(){
+ const f={setup:vSetup,ceremony:vCeremony,dice:vDice,rps:vRps,quiz:vQuiz,coop:vCoop,awards:vAwards}[view];
+ $('#main').innerHTML=f();renderNav();if(view==='coop')updT();
+}
+function go(v){
+ if(view==='coop'&&v!=='coop')stopTimer();
+ view=v;try{if(location.hash.slice(1)!==v)location.hash=v;}catch(e){}
+ render();window.scrollTo(0,0);
+}
+function pick(mode,id){
+ const st=mode==='dice'?D:R;
+ if(mode==='dice'&&D.rolling)return;if(mode==='rps'&&R.phase==='count')return;
+ let a=st.a,b=st.b;
+ if(a===id)a=null;else if(b===id)b=null;else if(!a)a=id;else if(!b)b=id;else b=id;
+ if(mode==='dice'){resetD();D.a=a;D.b=b;}else{resetR();R.a=a;R.b=b;}
+ sfx.tick();render();
+}
+function randPair(mode){
+ const ns=shuffle(S.nations).sort((x,y)=>(S.played[mode][x.id]||0)-(S.played[mode][y.id]||0));
+ if(mode==='dice'){if(D.rolling)return;resetD();D.a=ns[0].id;D.b=ns[1].id;}else{if(R.phase==='count')return;resetR();R.a=ns[0].id;R.b=ns[1].id;}
+ sfx.pop();render();
+}
+function bump(mode){const st=mode==='dice'?D:R;[st.a,st.b].forEach(id=>{S.played[mode][id]=(S.played[mode][id]||0)+1;});}
+function rollSide(side,dur){
+ if(D['v'+side]!=null||!D.a||!D.b||D.result||D.spin[side])return;
+ D.rolling++;D.spin[side]=true;render();
+ const fin=1+rnd(6);let delay=55,t=0;
+ (function tick(){
+  const p=Math.min(1,t/dur);
+  const e=document.getElementById('die-'+side);
+  if(e){e.innerHTML=dieFace(1+rnd(6));e.style.animationDuration=(0.14+p*0.5).toFixed(2)+'s';}
+  sfx.roll(p);
+  t+=delay;delay*=1.09;
+  if(t<dur){setTimeout(tick,delay);return;}
+  setTimeout(()=>{
+   D.spin[side]=false;D['v'+side]=fin;sfx.land();
+   const both=D.va!=null&&D.vb!=null;
+   if(!both)D.rolling--;
+   render();landFx(side);
+   if(both)setTimeout(()=>{D.rolling--;judge();},1000);
+  },delay);
+ })();
+}
+function landFx(side){const e=document.getElementById('die-'+side);if(e){e.classList.remove('land');void e.offsetWidth;e.classList.add('land');}}
+function rollBoth(){
+ if(!D.a||!D.b||D.rolling||D.result)return;
+ const left=['a','b'].filter(s=>D['v'+s]==null);
+ if(left.length===1){rollSide(left[0],2800);return;}
+ const first=rnd(2)?'a':'b',second=first==='a'?'b':'a';
+ rollSide(first,2300);rollSide(second,3800);
+}
+function judge(){
+ if(D.va==null||D.vb==null||D.result)return;
+ if(D.va===D.vb){D.result='tie';render();sfx.boop();return;}
+ D.result=D.va>D.vb?'a':'b';sc(D[D.result]).dice++;bump('dice');save();render();celebrate();
+}
+function countdown(words,done){
+ const ov=$('#count');ov.hidden=false;let i=0;const cols=['var(--red)','var(--blue)','var(--green)'];
+ (function next(){if(i>=words.length){ov.hidden=true;done();return;}ov.innerHTML=`<span class="cw" style="color:${cols[i%3]}">${esc(words[i])}</span>`;tone([523,659,880][i%3],.22);i++;setTimeout(next,700);})();
+}
+function rpsGo(){
+ if(!R.a||!R.b)return;R.ha=R.hb=null;R.round=null;R.phase='count';render();
+ countdown(['가위!','바위!','보!'],()=>{R.phase='choose';render();});
+}
+function hand(side,h){
+ if(R.phase!=='choose')return;R['h'+side]=h;sfx.pop();
+ if(!(R.ha&&R.hb)){render();return;}
+ if(R.ha===R.hb){R.round='tie';R.phase='roundEnd';render();sfx.boop();return;}
+ const w=BEATS[R.ha]===R.hb?'a':'b';R['w'+w]++;R.round=w;
+ if(R['w'+w]>=2){R.match=w;R.phase='matchEnd';sc(R[w]).rps++;bump('rps');save();render();celebrate();}
+ else{R.phase='roundEnd';render();tone(784,.2);}
+}
+
+document.addEventListener('click',e=>{
+ const el=e.target.closest('[data-act]');if(!el||el.disabled)return;
+ const a=el.dataset.act,id=el.dataset.id;
+ switch(a){
+  case 'nav':go(el.dataset.v);break;
+  case 'sound':S.sound=!S.sound;save();renderTools();if(S.sound)sfx.pop();else{try{speechSynthesis.cancel();}catch(x){}}break;
+  case 'fs':{let p=null;try{if(document.fullscreenElement){document.exitFullscreen();break;}p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}catch(x){}if(p&&p.catch)p.catch(()=>toast('이 화면에서는 전체 화면 버튼을 쓸 수 없어요. 키보드의 F11 키를 눌러 보세요.'));else if(!p)toast('이 화면에서는 전체 화면 버튼을 쓸 수 없어요. 키보드의 F11 키를 눌러 보세요.');break;}
+  case 'pennant':S.cer=+el.dataset.i;go('ceremony');break;
+  case 'newBlank':ask('예시 나라를 모두 지우고 빈 칸 8개로 새로 시작할까요? 지금까지 모은 별도 함께 지워져요.','새로 시작',()=>{S.nations=blankNations(8);S.cer=0;resetScores();render();renderBunting();});break;
+  case 'addNation':{const k=S.nations.length;S.nations.push({id:'a'+Date.now().toString(36),name:(k+1)+'번 나라',kid:'',intro:'',flag:null,sample:false,seed:50+rnd(900)});S.coop=null;save();render();renderBunting();break;}
+  case 'removeNation':{const n=N(id);if(!n)break;ask(`‘${n.name}’ 칸을 뺄까요? 이 나라의 별도 함께 사라져요.`,'빼기',()=>{S.nations=S.nations.filter(x=>x.id!==id);delete S.scores[id];S.coop=null;resetD();resetR();render();renderBunting();});break;}
+  case 'clearFlag':{const n=N(id);if(n){n.flag=null;save();render();renderBunting();}break;}
+  case 'cerPrev':S.cer=Math.max(0,S.cer-1);save();render();break;
+  case 'cerNext':S.cer=Math.min(S.nations.length-1,S.cer+1);save();render();break;
+  case 'cerGo':S.cer=+el.dataset.i;save();render();break;
+  case 'cerCheer':celebrate();break;
+  case 'cerSpeak':{const n=S.nations[S.cer];speak(`${n.name}! ${n.kid?'대표 친구 '+n.kid+'.':''} ${n.intro||''}`);break;}
+  case 'pick':pick(el.dataset.mode,id);break;
+  case 'randPair':randPair(el.dataset.mode);break;
+  case 'rollOne':rollSide(el.dataset.side,2800);break;
+  case 'rollBoth':rollBoth();break;
+  case 'diceAgain':D.va=D.vb=null;D.result=null;render();rollBoth();break;
+  case 'diceNext':resetD();render();break;
+  case 'rpsGo':rpsGo();break;
+  case 'hand':hand(el.dataset.side,el.dataset.h);break;
+  case 'rpsNext':resetR();render();break;
+  case 'qSpeak':{const q=QS[S.quiz.order[S.quiz.i]];speak(q.q+' '+q.o.map((o,k)=>(k+1)+'번, '+o).join('. '));break;}
+  case 'qReveal':S.quiz.revealed=true;S.quiz.picked=[];save();render();sfx.fanfare();break;
+  case 'qSkip':S.quiz.i++;S.quiz.revealed=false;S.quiz.picked=[];save();render();break;
+  case 'qPick':{const p=S.quiz.picked;const j=p.indexOf(id);if(j>=0)p.splice(j,1);else p.push(id);sfx.tick();render();break;}
+  case 'qAll':S.quiz.picked=S.nations.map(n=>n.id);render();break;
+  case 'qAward':{const p=S.quiz.picked;p.forEach(x=>{sc(x).quiz++;});if(p.length){toast(p.length+'개 나라가 별을 받았어요!');confetti();}S.quiz.i++;S.quiz.revealed=false;S.quiz.picked=[];save();render();break;}
+  case 'qRestart':S.quiz=null;ensureQuiz();save();render();break;
+  case 'coopShuffle':S.coop.teams=makeTeams(S.nations.map(n=>n.id));S.coop.res={};save();render();sfx.pop();break;
+  case 'mDraw':{const C=S.coop;let pool=MISSIONS.map((_,k)=>k).filter(k=>!C.used.includes(k)&&k!==C.m);if(!pool.length){C.used=[];pool=MISSIONS.map((_,k)=>k).filter(k=>k!==C.m);}setMission(pool[rnd(pool.length)]);break;}
+  case 'topicNext':{const C=S.coop;let t;do{t=TOPICS[rnd(TOPICS.length)];}while(t===C.topic&&TOPICS.length>1);C.topic=t;save();render();sfx.pop();break;}
+  case 'tToggle':tToggle();break;
+  case 'tReset':tReset();break;
+  case 'teamRes':{const C=S.coop,i=+el.dataset.i,v=el.dataset.v,prev=C.res[i],mem=C.teams[i];
+   if(prev==='ok')mem.forEach(x=>{const s=sc(x);s.coop=Math.max(0,s.coop-1);});
+   if(prev===v)delete C.res[i];else{C.res[i]=v;if(v==='ok')mem.forEach(x=>{sc(x).coop++;});}
+   save();render();if(C.res[i]==='ok')celebrate();else if(C.res[i]==='no')sfx.boop();break;}
+  case 'adj':{const s=sc(id),c=el.dataset.c;s[c]=Math.max(0,(s[c]||0)+(+el.dataset.d));save();render();break;}
+  case 'scoreReset':ask('모든 나라의 별을 0개로 지울까요? 대결 횟수와 퀴즈 진행도 처음으로 돌아가요.','지우기',()=>{resetScores();render();});break;
+  case 'awardStart':AW={list:computeAwards(),i:0,tok:0};$('#stageov').hidden=false;awShow();break;
+  case 'awNext':AW.i++;awShow();break;
+  case 'awClose':AW.tok++;$('#stageov').hidden=true;try{speechSynthesis.cancel();}catch(x){}break;
+  case 'modalYes':{$('#modal').hidden=true;const f=modalFn;modalFn=null;if(f)f();save();break;}
+  case 'modalNo':$('#modal').hidden=true;modalFn=null;break;
+ }
+});
+document.addEventListener('input',e=>{
+ const t=e.target;if(!t.dataset||!t.dataset.field)return;const n=N(t.dataset.id);if(!n)return;
+ n[t.dataset.field]=t.value;n.sample=false;saveSoon();renderBunting();
+});
+document.addEventListener('change',e=>{
+ const t=e.target;
+ if(t.dataset&&t.dataset.file){const f=t.files&&t.files[0];if(f)setFlag(t.dataset.file,f);t.value='';}
+ else if(t.id==='mSel'&&t.value!==''){setMission(+t.value);}
+});
+document.addEventListener('dragover',e=>{e.preventDefault();const z=e.target.closest&&e.target.closest('[data-drop]');document.querySelectorAll('.flagdrop.over').forEach(x=>{if(x!==z)x.classList.remove('over');});if(z)z.classList.add('over');});
+document.addEventListener('dragleave',e=>{const z=e.target.closest&&e.target.closest('[data-drop]');if(z&&!z.contains(e.relatedTarget))z.classList.remove('over');});
+document.addEventListener('drop',e=>{e.preventDefault();const z=e.target.closest&&e.target.closest('[data-drop]');document.querySelectorAll('.flagdrop.over').forEach(x=>x.classList.remove('over'));if(z&&e.dataTransfer&&e.dataTransfer.files[0])setFlag(z.dataset.drop,e.dataTransfer.files[0]);});
+document.addEventListener('keydown',e=>{
+ if(e.target.matches&&e.target.matches('input,select,textarea'))return;
+ if(!$('#modal').hidden){if(e.key==='Escape'){$('#modal').hidden=true;modalFn=null;}return;}
+ if(!$('#stageov').hidden){if(e.key==='ArrowRight'){const b=document.querySelector('#stageov [data-act="awNext"]');if(b)b.click();}if(e.key==='Escape')$('#stageov').hidden=true;return;}
+ if(view==='ceremony'){if(e.key==='ArrowRight'&&S.cer<S.nations.length-1){S.cer++;save();render();}if(e.key==='ArrowLeft'&&S.cer>0){S.cer--;save();render();}}
+});
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(h!==view&&VIEWS.some(v=>v[0]===h))go(h);});
+
+function boot(){buildNav();renderTools();renderBunting();const h=location.hash.slice(1);view=VIEWS.some(v=>v[0]===h)?h:'setup';render();}
+try{const hot=window.claude&&window.claude.hot;if(hot&&typeof hot.snapshot==='function')hot.snapshot(()=>({S}));}catch(e){}
+function start(data){if(data&&data.S&&Array.isArray(data.S.nations)&&data.S.nations.length)S=data.S;boot();}
+const hot=window.claude&&window.claude.hot;
+if(hot&&typeof hot.ready==='function')hot.ready(start);else start((hot&&hot.data)||{});
+})();
+</script>
+
+</body></html>
